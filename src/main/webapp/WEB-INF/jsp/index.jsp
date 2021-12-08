@@ -31,7 +31,7 @@
 				 </span>
 			</div>
 			<div class="card-body">
-				<form action="/loginktx" method="post">
+				<form action="/login" method="post">
 					<div class="row">
 						<div class="col-md-12">
 							<input type="text" name="username" class="form-control centertab"

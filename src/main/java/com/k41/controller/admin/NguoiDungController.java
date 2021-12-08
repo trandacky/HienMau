@@ -34,7 +34,7 @@ public class NguoiDungController {
         List<NguoiDung> nguoiDungs = pageable.getContent();
         model.addAttribute("nguoiDungs", "nguoiDungs");
         model.addAttribute("totalPage", pageable.getTotalPages());
-        return "/admin/QuanLyTaiKhoan/QuanLyTaiKhoan";
+        return "admin/QuanLyTaiKhoan/QuanLyTaiKhoan";
     }
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)

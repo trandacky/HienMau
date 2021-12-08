@@ -31,19 +31,19 @@ public class NguoiDung {
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "gioi_tinh")
     private Boolean gioiTinh;
 
     @Column(name = "active_key")
-    private UUID activeKey;
+    private String activeKey;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoiDung")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "nguoiDung")
     private List<QuyenNguoiDung> quyenNguoiDungs;
 
     public Long getId() {
@@ -118,11 +118,11 @@ public class NguoiDung {
         this.gioiTinh = gioiTinh;
     }
 
-    public UUID getActiveKey() {
+    public String getActiveKey() {
         return activeKey;
     }
 
-    public void setActiveKey(UUID activeKey) {
+    public void setActiveKey(String activeKey) {
         this.activeKey = activeKey;
     }
 

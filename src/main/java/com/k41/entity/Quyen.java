@@ -12,7 +12,7 @@ public class Quyen {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "role")
+    @Column(name = "role", unique = true)
     private String role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quyen")

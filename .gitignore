@@ -55,6 +55,7 @@ out/
 ######################
 /log/
 /target/
+/target/classes/*
 
 ######################
 # Gradle
