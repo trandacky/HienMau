@@ -40,7 +40,6 @@ public class NguoiDungController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public String themTaiKhoan(Model model, HttpServletRequest request) {
         String back = request.getHeader("Referer");
-
         return "redirect:" + back;
     }
 
