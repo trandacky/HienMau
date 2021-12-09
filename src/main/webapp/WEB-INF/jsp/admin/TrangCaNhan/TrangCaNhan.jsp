@@ -11,11 +11,12 @@
           crossorigin="anonymous">
 </head>
 <body>
-<form action="/admin/taikhoan" class="card card-body" method="Post">
+<c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
+<form action="/admin/trangcanhan/update" class="card card-body" method="Post">
     <div class="row">
         <div class="col-md-6">
             <label>Tên đăng nhập</label>
-            <input class="form-control" placeholder=" Tên đăng nhập" name="tenDangNhap" value="${nguoiDung.tenDangNhap}">
+            <input class="form-control" disabled placeholder=" Tên đăng nhập" name="tenDangNhap" value="${nguoiDung.tenDangNhap}">
         </div>
         <div class="col-md-6">
             <label>Email</label>
@@ -51,7 +52,7 @@
             </select>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" type="submit">Thêm</button>
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" type="submit">Cập Nhật</button>
         </div>
     </div>
 </form>

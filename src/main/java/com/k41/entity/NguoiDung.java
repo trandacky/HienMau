@@ -3,7 +3,6 @@ package com.k41.entity;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "nguoi_dung")
@@ -25,8 +24,8 @@ public class NguoiDung {
     @Column(name = "ngay_sinh")
     private Instant ngaySinh;
 
-    @Column(name = "que_quan")
-    private String queQuan;
+    @Column(name = "dia_chi")
+    private String diaChi;
 
     @Column(name = "so_dien_thoai")
     private String soDienThoai;
@@ -86,12 +85,12 @@ public class NguoiDung {
         this.ngaySinh = ngaySinh;
     }
 
-    public String getQueQuan() {
-        return queQuan;
+    public String getDiaChi() {
+        return diaChi;
     }
 
-    public void setQueQuan(String queQuan) {
-        this.queQuan = queQuan;
+    public void setDiaChi(String queQuan) {
+        this.diaChi = queQuan;
     }
 
     public String getSoDienThoai() {
@@ -140,5 +139,23 @@ public class NguoiDung {
 
     public void setQuyenNguoiDungs(List<QuyenNguoiDung> quyenNguoiDungs) {
         this.quyenNguoiDungs = quyenNguoiDungs;
+    }
+
+    @Override
+    public String toString() {
+        return "NguoiDung{" +
+                "id=" + id +
+                ", tenDangNhap='" + tenDangNhap + '\'' +
+                ", matKhau='" + matKhau + '\'' +
+                ", hoTen='" + hoTen + '\'' +
+                ", ngaySinh=" + ngaySinh +
+                ", diaChi='" + diaChi + '\'' +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                ", email='" + email + '\'' +
+                ", gioiTinh=" + gioiTinh +
+                ", activeKey='" + activeKey + '\'' +
+                ", isActive=" + isActive +
+                ", quyenNguoiDungs=" + quyenNguoiDungs +
+                '}';
     }
 }

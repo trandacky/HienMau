@@ -24,12 +24,9 @@ public class FogotPasswordService {
     private NguoiDungService nguoiDungService;
     private String port;
     private String hostname;
-    private final String fromEmail = "trandackydbz2@gmail.com";
-    private final String password = "dfwayuccfalffmiz";
-
-//    private final String fromEmail = "thithom.12082000@gmail.com";
-//    private final String password = "thithom12";
-    final String subject = "Quen Mat Khau";
+    private final String fromEmail = "thithom.12082000@gmail.com";
+    private final String password = "wujgqcawtqmmkctd";
+    final String subject = "Quên Mật Khẩu";
 
     public void sendEmail(NguoiDung nguoiDung) throws MessagingException, UnknownHostException {
         nguoiDung.setActiveKey(UUID.randomUUID().toString());
@@ -48,7 +45,6 @@ public class FogotPasswordService {
         message.setFrom(new InternetAddress(fromEmail));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(nguoiDung.getEmail(), false));
         message.setSubject(subject);
-        message.setSubject("HTML Message");
         String htmlContent = "<h1>" +
                 "<a href=\"" + getServerUrlPrefi() +"quen-mat-khau/"+ nguoiDung.getActiveKey().toString() + "\">" +
                 "Click vào link để đặt lại mật khẩu</a>" +

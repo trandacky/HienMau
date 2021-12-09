@@ -26,8 +26,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<NguoiDung> nguoiDung = nguoiDungService.findByTenDangNhapOrEmailLike(username);
-        if (!nguoiDung.isPresent())
+        if (!nguoiDung.isPresent()) {
+            if(!nguoiDung.get().getActive())
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
+        }
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         List<QuyenNguoiDung> quyenNguoiDungs = nguoiDung.get().getQuyenNguoiDungs();
         for (QuyenNguoiDung quyenNguoiDung : quyenNguoiDungs) {

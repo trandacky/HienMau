@@ -1,89 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<form action="/quanly/taikhoan/capnhat" method="post">
-<a href="quanly/taikhoan"><button class="btn btn-primary">Quay về trang thêm</button> </a>
-	<div class="content form-control bg-image">
-	
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-6">
-
-					<div class="form-group">
-						<label>Tên đăng nhập: </label> <label>${tendangnhap}</label>
-						<input type="hidden" value="${tendangnhap}" name="tendangnhap">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label>Password: </label> <input class="form-control" name="matkhau"
-							type="password">
-					</div>
-				</div>
-				<div class="col-md-6">
-
-					<div class="form-group">
-						<label>Họ tên: </label> <input class="form-control" value="${hoten}" name="hoten">
-					</div>
-				</div>
-				<div class="col-md-4">
-
-					<div class="form-group">
-						<label>Số điện thoại: </label> <input class="form-control" value="${sodienthoai}" name="sodienthoai">
-					</div>
-				</div>
-
-				<div class="col-md-2">
-					<div class="form-group">
-						<label>Quyền: </label> <select class="form-control"  name="quyen">
-							<option <c:if test="${quyen==0}">selected</c:if> value=0>DISABLE</option>
-							<option <c:if test="${quyen==1}">selected</c:if> value="1">ADMIN</option>
-							<option <c:if test="${quyen==2}">selected</c:if> value="2">USER</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			
+		 pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet"
+		  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		  crossorigin="anonymous">
+</head>
+<body>
+<a href="/admin/taikhoan">
+	<input type="button" class="btn btn-warning" value="< Quay lại Thêm tài khoản"></a>
+<form action="/admin/taikhoan/capnhat/${nguoiDung.tenDangNhap}" class="card card-body" method="Post">
+	<div class="row">
+		<div class="col-md-6">
+			<label>Tên đăng nhập</label>
+			<input class="form-control" placeholder=" Tên đăng nhập" disabled  value="${nguoiDung.tenDangNhap}">
+			<input type="hidden" name="tenDangNhap" value="${nguoiDung.tenDangNhap}">
 		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-4">
-
-					<div class="form-group">
-						<label>Email: </label> <input class="form-control" value="${email}" name="email">
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Quê quán: </label> <input class="form-control" value="${quequan}" name="quequan">
-					</div>
-				</div>
-				<div class="col-md-2">
-
-					<div class="form-group">
-						<label>Ngày tháng năm sinh: </label> <input class="form-control" value="${ngaythangnamsinh}" type="date" name="ngaythangnamsinh">
-					</div>
-				</div>
-
-				<div class="col-md-2">
-					<div class="form-group">
-						<label>Giới tính: </label> <select value="${gioitinh}" class="form-control"
-							name="gioitinh">
-							<option <c:if test="${gioitinh==true}">selected</c:if> value=true>NAM</option>
-							<option <c:if test="${gioitinh==false}">selected</c:if> value=false>Nữ</option>
-
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="clearfix" style="float: right;">
-						<button class="btn btn-primary pull-right" type="submit"
-							onclick="#">Cập nhật</button>
-					</div>
-				</div>
-			</div>
+		<div class="col-md-6">
+			<label>Email</label>
+			<input class="form-control" placeholder="  Email" disabled  value="${nguoiDung.email}">
+			<input type="hidden" name="email" value="${nguoiDung.email}">
+		</div>
+		<div class="col-md-6">
+			<label>Địa chỉ</label>
+			<input class="form-control" placeholder=" Địa chỉ" name="diaChi" value="${nguoiDung.diaChi}">
+		</div>
+		<div class="col-md-6">
+			<label>Họ và tên</label>
+			<input class="form-control" placeholder=" Họ và tên" name="hoTen" value="${nguoiDung.hoTen}">
+		</div>
+		<div class="col-md-6">
+			<label>Ngày sinh</label>
+			<input class="form-control" type="date" placeholder=" Ngày sinh" name="ngaySinh"
+				   value="${nguoiDung.ngaySinh.toString().substring(0,10)}">
+		</div>
+		<div class="col-md-6">
+			<label>Số điện thoại</label>
+			<input class="form-control" placeholder=" Số điện thoại" name="soDienThoai"
+				   value="${nguoiDung.soDienThoai}">
+		</div>
+		<div class="col-md-6">
+			<label>Mật khẩu</label>
+			<input class="form-control" type="password" placeholder=" Mật khẩu" name="matKhau">
+		</div>
+		<div class="col-md-6">
+			<label>Giới tính</label>
+			<select class="form-control" name ="gioiTinh">
+				<option value="true" <c:if test="${nguoiDung.gioiTinh}">selected</c:if>>Nam</option>
+				<option value="false" <c:if test="${!nguoiDung.gioiTinh}">selected</c:if>>Nữ</option>
+			</select>
+		</div>
+		<div class="col-md-6">
+			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit" type="submit">Sửa</button>
 		</div>
 	</div>
-	</form>
+</form>
+</body>
+</html>

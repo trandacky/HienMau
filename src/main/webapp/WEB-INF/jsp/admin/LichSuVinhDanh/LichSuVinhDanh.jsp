@@ -60,7 +60,7 @@
 <div class="text-center">
     <H5>
         <c:forEach begin="1" end="${totalPage}" var="p">
-            <a href="<c:url value="/admin/coso" >
+            <a href="<c:url value="/admin/lichsuvinhdanh" >
                 <c:param name="page" value="${p}"/>${p}</c:url>">
                     ${p}</a>
         </c:forEach>

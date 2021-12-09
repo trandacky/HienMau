@@ -46,7 +46,7 @@
 					<li class="nav-item"><a class="nav-link ${activetrangchu}"
 						href="/home">Trang chủ</a></li>
 					<li class="nav-item"><a class="nav-link ${activetrangcanhan}"
-						href="/trangcanhan">Trang cá nhân</a></li>
+						href="/admin/trangcanhan">Trang cá nhân</a></li>
 					<li class="nav-item"><a class="nav-link ${activetaikhoan}"
 						href="/admin/taikhoan">Quản lý tài khoản</a></li>
 					<li class="nav-item"><a class="nav-link ${activecoso}"
