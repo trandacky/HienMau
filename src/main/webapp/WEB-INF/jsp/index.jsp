@@ -27,7 +27,7 @@
 			<div class="">
 				<span> <img src="/image/logoqnu.jpg"></span><br>
 				 <span>
-				 <H3>Hệ thống đăng ký kí túc xá</H3>
+				 <H3>Hệ thống vinh danh người hiến máu</H3>
 				 </span>
 			</div>
 			<div class="card-body">

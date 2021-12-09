@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Đăng ký kí túc xá</title>
+<title>Vinh Danh Hiến Máu</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -21,7 +21,10 @@
 	background-position: center center;
 	background-size: cover;
 }
-
+ .centertab {
+	 margin: 0 auto;
+	 width: 50%;
+ }
 .topright {
 	position: absolute;
 	top: 10px;
@@ -43,15 +46,17 @@
 					<li class="nav-item"><a class="nav-link ${activetrangchu}"
 						href="/home">Trang chủ</a></li>
 					<li class="nav-item"><a class="nav-link ${activetrangcanhan}"
-						href="/nguoidung/trangcanhan">Trang cá nhân</a></li>
+						href="/trangcanhan">Trang cá nhân</a></li>
 					<li class="nav-item"><a class="nav-link ${activetaikhoan}"
-						href="/quanly/taikhoan">Tài khoản</a></li>
-					<li class="nav-item"><a class="nav-link ${activekhu}"
-						href="/quanly/khu">Quản lý khu</a></li>
-					<li class="nav-item"><a class="nav-link ${activequangcao}"
-						href="/quanly/quangcao">Quảng cáo</a></li>
-					<li class="nav-item"><a class="nav-link ${activedangky}"
-						href="/quanly/modangky">Mở đăng ký</a></li>
+						href="/admin/taikhoan">Quản lý tài khoản</a></li>
+					<li class="nav-item"><a class="nav-link ${activecoso}"
+						href="/admin/coso">Cơ Sở</a></li>
+					<li class="nav-item"><a class="nav-link ${activelichsuvinhdanh}"
+						href="/admin/lichsuvinhdanh">Lịch sử vinh danh</a></li>
+					<li class="nav-item"><a class="nav-link ${activevinhdanhmoi}"
+											href="/admin/vinhdanhmoi">Vinh Danh Mới</a></li>
+					<li class="nav-item"><a class="nav-link ${activedoimatkhau}"
+											href="/admin/quen-mat-khau" onclick="return confirm('Thao tác trên sẽ không hoàn lại được! Bạn có chắc thực hiện thao tác?');">Đổi mật khẩu</a></li>
 				</ul>
 
 				<div class="topright">
@@ -62,4 +67,9 @@
 		</nav>
 	</div>
 </body>
+<c:if test="${not empty message}">
+	<div class="alert alert-${alert}">
+			${message}
+	</div>
+</c:if>
 </html>

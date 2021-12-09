@@ -1,6 +1,8 @@
-package com.k41.controller;
+package com.k41.controller.admin;
 
 import com.k41.config.PasswordEncript;
+import com.k41.config.TaiKhoan;
+import com.k41.constants.PageActive;
 import com.k41.entity.NguoiDung;
 import com.k41.service.FogotPasswordService;
 import com.k41.service.NguoiDungService;
@@ -17,20 +19,21 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 
 @Controller
-public class Public {
+@RequestMapping("/admin")
+public class AdminDoiMatKhau {
     @Autowired
     private NguoiDungService nguoiDungService;
     @Autowired
     private FogotPasswordService fogotPasswordService;
-    @RequestMapping(value = {"/quen-mat-khau"},method = RequestMethod.GET)
-    public String loadTrangQuenMatKhau() {
-        return "/user/NhapEmailQuenMatKhau";
-    }
 
-    @RequestMapping(value = {"/quen-mat-khau"},method = RequestMethod.POST)
-    public String quenMatKhau(Model model, HttpServletRequest request) throws UnknownHostException, MessagingException {
-        String tenDangNhapOrEmail = request.getParameter("tenDangNhapOrEmail");
-        Optional<NguoiDung> nguoiDung = nguoiDungService.findByTenDangNhapOrEmailLike(tenDangNhapOrEmail);
+    @Autowired
+    private TaiKhoan taiKhoan;
+
+    @RequestMapping(value = {"/quen-mat-khau"},method = RequestMethod.GET)
+    public String quenMatKhau(Model model) throws UnknownHostException, MessagingException {
+        loadTen(model);
+        model.addAttribute(PageActive.activedoimatkhau, PageActive.active);
+        Optional<NguoiDung> nguoiDung = nguoiDungService.findByTenDangNhapOrEmailLike(taiKhoan.getTaiKhoanDangNhap().getTenDangNhap());
         if(!nguoiDung.isPresent()) {
             model.addAttribute("message", "Tên đăng nhập hoặc email không tồn tại");
             model.addAttribute("alert", "warning");
@@ -44,6 +47,8 @@ public class Public {
 
     @RequestMapping(value = {"/quen-mat-khau/{uuid}"},method = RequestMethod.GET)
     public String loadQuenMatKhau(@PathVariable String uuid, Model model) {
+        loadTen(model);
+        model.addAttribute(PageActive.activedoimatkhau, PageActive.active);
         model.addAttribute("uuid", uuid);
         Optional<NguoiDung> nguoiDung = nguoiDungService.findByActiveKey(uuid);
         if(!nguoiDung.isPresent()) {
@@ -55,6 +60,8 @@ public class Public {
 
     @RequestMapping(value = {"/quen-mat-khau/{uuid}"},method = RequestMethod.POST)
     public String doiMatKhau(@PathVariable String uuid, Model model, HttpServletRequest request) {
+        loadTen(model);
+        model.addAttribute(PageActive.activedoimatkhau, PageActive.active);
         String matKhauMoi = request.getParameter("matKhauMoi");
         String nhapLaiMatKhauMoi = request.getParameter("nhapLaiMatKhauMoi");
 
@@ -75,6 +82,10 @@ public class Public {
             nguoiDung1.setMatKhau(PasswordEncript.encrytePassword(matKhauMoi));
             nguoiDungService.save(nguoiDung1);
         }
-        return "redirect:/";
+        return "redirect:/home";
+    }
+
+    private void loadTen(Model model) {
+        model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getHoTen());
     }
 }

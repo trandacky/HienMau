@@ -24,9 +24,11 @@ public class FogotPasswordService {
     private NguoiDungService nguoiDungService;
     private String port;
     private String hostname;
+    private final String fromEmail = "trandackydbz2@gmail.com";
+    private final String password = "dfwayuccfalffmiz";
 
-    private final String fromEmail = "thithom.12082000@gmail.com";
-    private final String password = "thithom12";
+//    private final String fromEmail = "thithom.12082000@gmail.com";
+//    private final String password = "thithom12";
     final String subject = "Quen Mat Khau";
 
     public void sendEmail(NguoiDung nguoiDung) throws MessagingException, UnknownHostException {

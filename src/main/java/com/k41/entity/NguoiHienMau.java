@@ -72,6 +72,9 @@ public class NguoiHienMau {
     @JsonIgnore
     private Instant lastModifiedDate = Instant.now();
 
+    @Column(name = "lan_hien_gan_nhat")
+    private Instant lanHienGanNhat = Instant.now();
+
     public Long getId() {
         return id;
     }
@@ -198,5 +201,13 @@ public class NguoiHienMau {
 
     public void setSoLanHienMau(int soLanHienMau) {
         this.soLanHienMau = soLanHienMau;
+    }
+
+    public Instant getLanHienGanNhat() {
+        return lanHienGanNhat;
+    }
+
+    public void setLanHienGanNhat(Instant lanHienGanNhat) {
+        this.lanHienGanNhat = lanHienGanNhat;
     }
 }

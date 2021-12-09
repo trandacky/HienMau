@@ -27,28 +27,11 @@
 }
 </style>
 <body>
-	<c:import url="/WEB-INF/jsp/${headerForm}" />
-	<c:if test="${not empty noidungalert}">
-		<div class="alert alert-${alert}">${noidungalert}</div>
-	</c:if>
-	<div class="text-center"><h3>Khu</h3></div>
-	<div class="text-center form-control">
-		<table class="table table-striped">
-			<tr>
-				<c:forEach items="${ListKhu}" var="khuv">
+	<c:import url="/WEB-INF/jsp/headerAdmin.jsp" />
 
-					<td
-						class="btn btn-outline-warning <c:if test="${khuv.getIdKhu()==khu.getIdKhu()}">active</c:if>"><a
-						href="/home/khu/idkhu=${khuv.idKhu}&tang=<% if(request.getSession().getAttribute("giuong")=="") ;else out.print(1); %>"><img
-							src="/image/ktx.jpg" class="img-size">
-							<h3>${khuv.tenKhu}</h3>Số tầng: ${khuv.soTang}<br>Giới tính:
-							${khuv.gioiTinh==true ? 'Nam':'Nữ'}</a></td>
-				</c:forEach>
-			</tr>
-		</table>
+	<div class="text-center"><h3>Trang Chủ</h3></div>
+	<div class="text-center form-control">
+
 	</div>
-	<c:import url="/WEB-INF/jsp/user/${formtang}" />
-	<c:import url="/WEB-INF/jsp/user/${formphong}" />
-	<c:import url="/WEB-INF/jsp/user/${formgiuong}" />
 </body>
 </html>

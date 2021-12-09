@@ -14,6 +14,9 @@ public class CoSo {
     @Column(length = 100, name = "ten_co_so")
     private String tenCoSo;
 
+    @Column(name = "tinh_trang_hoat_dong")
+    private boolean tinhTrangHoatDong = true;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coSo")
     private List<NguoiHienMau> nguoiHienMaus;
 
@@ -39,5 +42,13 @@ public class CoSo {
 
     public void setNguoiHienMaus(List<NguoiHienMau> nguoiHienMaus) {
         this.nguoiHienMaus = nguoiHienMaus;
+    }
+
+    public boolean isTinhTrangHoatDong() {
+        return tinhTrangHoatDong;
+    }
+
+    public void setTinhTrangHoatDong(boolean tinhTrangHoatDong) {
+        this.tinhTrangHoatDong = tinhTrangHoatDong;
     }
 }
