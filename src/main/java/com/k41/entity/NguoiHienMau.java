@@ -28,6 +28,9 @@ public class NguoiHienMau {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoiHienMau")
     private List<DeXuatTonVinh> deXuatTonVinhs;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "nguoiHienMau")
+    private List<LichSuHienMau> lichSuHienMaus;
+
     @Column(name = "ho_ten")
     private String hoTen;
 
@@ -209,5 +212,13 @@ public class NguoiHienMau {
 
     public void setLanHienGanNhat(Instant lanHienGanNhat) {
         this.lanHienGanNhat = lanHienGanNhat;
+    }
+
+    public List<LichSuHienMau> getLichSuHienMaus() {
+        return lichSuHienMaus;
+    }
+
+    public void setLichSuHienMaus(List<LichSuHienMau> lichSuHienMaus) {
+        this.lichSuHienMaus = lichSuHienMaus;
     }
 }
