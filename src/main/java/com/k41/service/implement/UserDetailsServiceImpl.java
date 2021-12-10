@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 
 @Service
@@ -27,8 +28,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<NguoiDung> nguoiDung = nguoiDungService.findByTenDangNhapOrEmailLike(username);
         if (nguoiDung.isPresent()) {
-            if(!nguoiDung.get().getActive())
-            throw new UsernameNotFoundException("User " + username + " was not found in the database");
+            if (!ObjectUtils.isEmpty(nguoiDung.get().getActive())) {
+                if (!nguoiDung.get().getActive())
+                    throw new UsernameNotFoundException("User " + username + " was not found in the database");
+            } else {
+                NguoiDung nguoiDung1 = nguoiDung.get();
+                nguoiDung1.setActive(true);
+                nguoiDungService.save(nguoiDung1);
+            }
         } else {
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
         }

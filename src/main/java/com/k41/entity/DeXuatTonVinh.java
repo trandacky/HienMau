@@ -21,6 +21,9 @@ public class DeXuatTonVinh {
     @Column(name = "ngay_ton_vinh")
     private Instant ngayTonVinh = Instant.now();
 
+    @Column(name = "chap_nhan_ton_vinh")
+    private boolean chapNhanTonVinh = false;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +54,13 @@ public class DeXuatTonVinh {
 
     public void setNgayTonVinh(Instant ngayTonVinh) {
         this.ngayTonVinh = ngayTonVinh;
+    }
+
+    public boolean isChapNhanTonVinh() {
+        return chapNhanTonVinh;
+    }
+
+    public void setChapNhanTonVinh(boolean chapNhanTonVinh) {
+        this.chapNhanTonVinh = chapNhanTonVinh;
     }
 }
