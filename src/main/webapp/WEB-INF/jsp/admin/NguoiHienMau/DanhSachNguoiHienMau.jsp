@@ -5,12 +5,12 @@
 <html>
 <body>
 <c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
-<h2>Danh sách hiến máu cho cơ sở ${coso}</h2>
+<h2>Danh sách hiến máu cho cơ sở ${coso.tenCoSo}</h2>
 <div class="row">
     <div class="col-md-12">
-        <form class="form-inline my-2 my-lg-0 form-control"  action="/admin/coso/id/upload" method="Post">
+        <form class="form-inline my-2 my-lg-0 form-control" enctype="MULTIPART/FORM-DATA"  action="/admin/coso/danhsach?id=${coso.id}" method="Post">
             <label class="form-label" for="customFile">Upload Danh Sách Hiến Máu Mới</label>
-            <input type="file" class="form-control col-md-7" id="customFile"/>
+            <input type="file" class="form-control col-md-7" name="file" id="customFile"/>
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Upload</button>
         </form>
     </div>
