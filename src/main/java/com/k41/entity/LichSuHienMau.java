@@ -15,8 +15,8 @@ public class LichSuHienMau {
     @JoinColumn(name = "nguoi_hien_mau_id", nullable = false)
     private NguoiHienMau nguoiHienMau;
 
-    @Column(name = "muc_ton_vinh")
-    private int ml;
+    @Column(name = "ml")
+    private Double ml;
 
     @Column(name = "ngay_hien_mau")
     private Instant ngayHienMau = Instant.now();
@@ -37,11 +37,11 @@ public class LichSuHienMau {
         this.nguoiHienMau = nguoiHienMau;
     }
 
-    public int getMl() {
+    public Double getMl() {
         return ml;
     }
 
-    public void setMl(int ml) {
+    public void setMl(Double ml) {
         this.ml = ml;
     }
 

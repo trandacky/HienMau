@@ -10,6 +10,7 @@ public class ImportDTO {
     private String gioiTinh;
     private String nhomMau;
     private String ngayHien;
+    private String ml;
 
     public String getHoTen() {
         return hoTen;
@@ -83,18 +84,12 @@ public class ImportDTO {
         this.ngayHien = ngayHien;
     }
 
-    @Override
-    public String toString() {
-        return "ImportDTO{" +
-                "hoTen='" + hoTen + '\'' +
-                ", ngaySinh='" + ngaySinh + '\'' +
-                ", diaChi='" + diaChi + '\'' +
-                ", soDienThoai='" + soDienThoai + '\'' +
-                ", email='" + email + '\'' +
-                ", cmndOrCccd='" + cmndOrCccd + '\'' +
-                ", gioiTinh='" + gioiTinh + '\'' +
-                ", nhomMau='" + nhomMau + '\'' +
-                ", ngayHien='" + ngayHien + '\'' +
-                '}';
+    public String getMl() {
+        return ml;
     }
+
+    public void setMl(String ml) {
+        this.ml = ml;
+    }
+
 }

@@ -49,6 +49,9 @@ public class NguoiHienMau {
     @Column(name = "diaChi")
     private String diaChi;
 
+    @Column(name = "gioi_tinh")
+    private boolean gioiTinh;
+
     @Column(name = "muc_ton_vinh")
     private int mucTonVinh;
 
@@ -220,5 +223,13 @@ public class NguoiHienMau {
 
     public void setLichSuHienMaus(List<LichSuHienMau> lichSuHienMaus) {
         this.lichSuHienMaus = lichSuHienMaus;
+    }
+
+    public boolean isGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 }

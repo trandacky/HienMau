@@ -98,7 +98,7 @@ public class CoSoController {
                                             Model model, HttpServletRequest request, MultipartFile file) throws Exception {
         try {
             List<ImportDTO> importDTOS = importService.importExcelFile(file);
-            nguoiHienMauService.saveByImportDTO(importDTOS);
+            nguoiHienMauService.saveByImportDTO(importDTOS, id);
         } catch (Exception exception) {
             model.addAttribute("message", "File không đúng định dạng");
             model.addAttribute("alert", "danger");
