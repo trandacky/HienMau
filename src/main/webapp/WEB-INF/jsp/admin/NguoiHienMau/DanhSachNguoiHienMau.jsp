@@ -32,25 +32,36 @@
             <th>Người hiến</th>
             <th>Số điện thoại</th>
             <th>CMND/CCCD</th>
+            <th>Email</th>
+
             <th>Ngày sinh</th>
             <th>Địa chỉ</th>
+            <th>Nhóm máu</th>
+            <th>Giới tính</th>
             <th>Mức tôn vinh</th>
             <th>Số lần hiến</th>
             <th>Lần hiến gần nhât</th>
+
         </tr>
-        <c:forEach items="${coSos}" var="coSo">
+        <c:forEach items="${nguoiHienMaus}" var="nguoiHienMau">
             <tr>
-                <td><a href="/admin/coso/danhsach?id=${coSo.id}">${coSo.id}</a></td>
-                <td><a href="/admin/coso/danhsach?id=${coSo.id}">${coSo.tenCoSo}</a></td>
-                <td><a href="/admin/coso/doiquyen?id=${coSo.id}">
-                    <input type="button" class="btn btn-primary"
-                           style='background-color:
-                           <c:if test="${coSo.tinhTrangHoatDong==false}">red</c:if>
-                           <c:if test="${coSo.tinhTrangHoatDong==true}">green</c:if>'
-                           value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>
-                            <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>
-						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>
-                </a></td>
+                <td>${nguoiHienMau.id}</td>
+                <td>${nguoiHienMau.hoTen}</td>
+                <td>${nguoiHienMau.soDienThoai}</td>
+                <td>${nguoiHienMau.cmndOrCccd}</td>
+                <td>${nguoiHienMau.email}</td>
+                <td>${nguoiHienMau.ngaySinh}</td>
+
+                <td>${nguoiHienMau.diaChi}</td>
+                <td>${nguoiHienMau.nhomMau}</td>
+                <td>
+                    <c:if test="${nguoiHienMau.gioiTinh==false}">Nữ</c:if>
+                    <c:if test="${nguoiHienMau.gioiTinh==true}">Nam</c:if>
+                </td>
+                <td>${nguoiHienMau.mucTonVinh}</td>
+                <td>${nguoiHienMau.soLanHienMau}</td>
+                <td>${nguoiHienMau.lanHienGanNhat}</td>
+
             </tr>
         </c:forEach>
 
@@ -61,7 +72,7 @@
 <div class="text-center">
     <H5>
         <c:forEach begin="1" end="${totalPage}" var="p">
-            <a href="<c:url value="/admin/coso" >
+            <a href="<c:url value="/admin/coso/danhsach?id=${coso.id}" >
                 <c:param name="page" value="${p}"/>${p}</c:url>">
                     ${p}</a>
         </c:forEach>

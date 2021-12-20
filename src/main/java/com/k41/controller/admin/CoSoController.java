@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,7 +84,7 @@ public class CoSoController {
     public String danhSachHienMauCoSo(@RequestParam(value = "id", required = true) Long id, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         loadTen(model);
         if (ObjectUtils.isEmpty(page)) page = 1;
-        Pageable paging = PageRequest.of(page - 1, PageConstant.PAGE_SIZE, Sort.by("lastModifiedDate").descending());
+        Pageable paging = PageRequest.of(page - 1, PageConstant.PAGE_SIZE, Sort.by("lanHienGanNhat").descending());
         Page<NguoiHienMau> pageable = nguoiHienMauService.findPageByCoSoId(paging, id);
         List<NguoiHienMau> nguoiHienMaus = pageable.getContent();
         CoSo coSo = coSoService.findById(id);
@@ -102,10 +103,11 @@ public class CoSoController {
         } catch (Exception exception) {
             model.addAttribute("message", "File không đúng định dạng");
             model.addAttribute("alert", "danger");
-
         }
+        model.addAttribute("message", "Upload thành công");
+        model.addAttribute("alert", "success");
         loadTen(model);
-        Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("lastModifiedDate").descending());
+        Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("lanHienGanNhat").descending());
         Page<NguoiHienMau> pageable = nguoiHienMauService.findPageByCoSoId(paging, id);
         List<NguoiHienMau> nguoiHienMaus = pageable.getContent();
         CoSo coSo = coSoService.findById(id);
@@ -113,6 +115,32 @@ public class CoSoController {
         model.addAttribute("nguoiHienMaus", nguoiHienMaus);
         model.addAttribute("totalPage", pageable.getTotalPages());
         return "/admin/NguoiHienMau/DanhSachNguoiHienMau";
+    }
+
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    public String getEditCoSo(@PathVariable(value = "id", required = true) Long id, Model model) throws Exception {
+
+        loadTen(model);
+
+        CoSo coSo = coSoService.findById(id);
+
+        Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("id").descending());
+        Page<CoSo> pageable = coSoService.findPage(paging);
+        List<CoSo> coSos = pageable.getContent();
+        model.addAttribute("coSos", coSos);
+        model.addAttribute("coso", coSo);
+        model.addAttribute("totalPage", pageable.getTotalPages());
+        return "/admin/CoSo/CoSoEdit";
+    }
+
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.POST)
+    public String editCoSo(@PathVariable(value = "id", required = true) Long id, Model model,
+                           HttpServletRequest request) throws Exception {
+        String tenCoso = request.getParameter("tenCoSo");
+        CoSo coSo = coSoService.findById(id);
+        coSo.setTenCoSo(tenCoso);
+        coSoService.save(coSo);
+        return "redirect:/admin/coso/";
     }
 
     private void loadTen(Model model) {

@@ -92,4 +92,19 @@ public class ImportDTO {
         this.ml = ml;
     }
 
+    @Override
+    public String toString() {
+        return "ImportDTO{" +
+                "hoTen='" + hoTen + '\'' +
+                ", ngaySinh='" + ngaySinh + '\'' +
+                ", diaChi='" + diaChi + '\'' +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                ", email='" + email + '\'' +
+                ", cmndOrCccd='" + cmndOrCccd + '\'' +
+                ", gioiTinh='" + gioiTinh + '\'' +
+                ", nhomMau='" + nhomMau + '\'' +
+                ", ngayHien='" + ngayHien + '\'' +
+                ", ml='" + ml + '\'' +
+                '}';
+    }
 }

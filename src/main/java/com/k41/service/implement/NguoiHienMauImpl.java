@@ -8,10 +8,12 @@ import com.k41.repository.CoSoRepository;
 import com.k41.repository.LichSuHienMauRepository;
 import com.k41.repository.NguoiHienMauRepository;
 import com.k41.service.NguoiHienMauService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.text.ParseException;
@@ -38,6 +40,7 @@ public class NguoiHienMauImpl implements NguoiHienMauService {
     }
 
     @Override
+    @Transactional
     public void saveByImportDTO(List<ImportDTO> importDTOS, Long id) throws ParseException {
         List<NguoiHienMau> nguoiHienMaus = new ArrayList<>();
         List<LichSuHienMau> lichSuHienMaus = new ArrayList<>();
@@ -45,11 +48,7 @@ public class NguoiHienMauImpl implements NguoiHienMauService {
         LichSuHienMau lichSuHienMau = null;
         for (ImportDTO importDTO : importDTOS) {
             parseImportDTO(importDTO, nguoiHienMau, lichSuHienMau, id);
-            nguoiHienMaus.add(nguoiHienMau);
-            lichSuHienMaus.add(lichSuHienMau);
         }
-        nguoiHienMauRepository.saveAll(nguoiHienMaus);
-        lichSuHienMauRepository.saveAll(lichSuHienMaus);
 
     }
 
@@ -84,23 +83,25 @@ public class NguoiHienMauImpl implements NguoiHienMauService {
             nguoiHienMau.setNgaySinh(ngaySinh);
             nguoiHienMau.setGioiTinh(gioiTinh);
             nguoiHienMau.setEmail(email);
+            nguoiHienMau.setNhomMau(nhomMau);
+            nguoiHienMau = nguoiHienMauRepository.save(nguoiHienMau);
         }
-        Optional<LichSuHienMau> lichSuHienMau1 = lichSuHienMauRepository.findFirstByNguoiHienMauAndNgayHienMau(nguoiHienMau, ngayHien);
-        if (lichSuHienMau1.isPresent()) {
-            lichSuHienMau = lichSuHienMau1.get();
-        } else {
+        Optional<LichSuHienMau> lichSuHienMau1 = lichSuHienMauRepository.findByNguoiHienMauAndNgayHienMau(nguoiHienMau, ngayHien);
+        if (!lichSuHienMau1.isPresent()) {
             nguoiHienMau.setSoLanHienMau(nguoiHienMau.getSoLanHienMau() + 1);
+            if (nguoiHienMau.getLanHienGanNhat().isBefore(ngayHien)) {
+                nguoiHienMau.setLanHienGanNhat(ngayHien);
+            }
             lichSuHienMau = new LichSuHienMau();
             lichSuHienMau.setNguoiHienMau(nguoiHienMau);
             lichSuHienMau.setNgayHienMau(ngayHien);
             lichSuHienMau.setMl(ml);
+            lichSuHienMauRepository.save(lichSuHienMau);
         }
-
     }
 
-
     private Instant parseDatetime(String date) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dateStr = new Date();
         if (!ObjectUtils.isEmpty(date)) {
             dateStr = formatter.parse(date);

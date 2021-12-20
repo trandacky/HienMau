@@ -5,13 +5,15 @@
 <html>
 <body>
 <c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
-<form action="/admin/coso" method="Post">
+<a href="/admin/coso">
+    <input type="button" class="btn btn-warning" value="< Quay lại Thêm Cơ sở"></a>
+<form action="/admin/coso/${coso.id}" method="Post">
     <div class="col-md-12 centertab">
         <div class="card">
             <div class="card-body">
                 <input class="form-control col-md-12"
-                       placeholder="Tên Cơ sở" name="tenCoSo">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" type="submit">Thêm</button>
+                       placeholder="Tên Cơ sở" name="tenCoSo" value="${coso.tenCoSo}">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" type="submit">Sửa</button>
             </div>
         </div>
     </div>
@@ -30,7 +32,6 @@
             <th>ID</th>
             <th>Tên Cơ Sở</th>
             <th>Tình trạng hoạt động</th>
-            <th>Thao tác</th>
         </tr>
         <c:forEach items="${coSos}" var="coSo">
             <tr>
@@ -44,10 +45,6 @@
                            value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>
                             <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>
 						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>
-                </a></td>
-                <td><a href="/admin/coso/${coSo.id}">
-                    <button class="btn btn-warning">Sửa</button>
-
                 </a></td>
             </tr>
         </c:forEach>

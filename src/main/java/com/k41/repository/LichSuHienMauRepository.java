@@ -9,5 +9,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LichSuHienMauRepository extends JpaRepository<LichSuHienMau, Long> {
-    Optional<LichSuHienMau> findFirstByNguoiHienMauAndNgayHienMau(NguoiHienMau nguoiHienMau, Instant ngayHienMau);
+    Optional<LichSuHienMau> findByNguoiHienMauAndNgayHienMau(NguoiHienMau nguoiHienMau, Instant ngayHienMau);
 }

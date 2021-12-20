@@ -46,8 +46,11 @@ public class NguoiHienMau {
     @Column(name = "cmnd_or_cccd")
     private String cmndOrCccd;
 
-    @Column(name = "diaChi")
+    @Column(name = "dia_chi")
     private String diaChi;
+
+    @Column(name = "nhom_mau")
+    private String nhomMau;
 
     @Column(name = "gioi_tinh")
     private boolean gioiTinh;
@@ -58,7 +61,7 @@ public class NguoiHienMau {
     @Column(name = "so_lan_hien_mau")
     private int soLanHienMau;
 
-    @Column(name = "nguoi_tao", nullable = false, length = 100, updatable = false)
+    @Column(name = "nguoi_tao", length = 100, updatable = false)
     @CreatedBy
     @JsonIgnore
     private String createdBy;
@@ -231,5 +234,13 @@ public class NguoiHienMau {
 
     public void setGioiTinh(boolean gioiTinh) {
         this.gioiTinh = gioiTinh;
+    }
+
+    public String getNhomMau() {
+        return nhomMau;
+    }
+
+    public void setNhomMau(String nhomMau) {
+        this.nhomMau = nhomMau;
     }
 }
