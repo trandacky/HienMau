@@ -24,6 +24,9 @@ public class DeXuatTonVinh {
     @Column(name = "chap_nhan_ton_vinh")
     private boolean chapNhanTonVinh = false;
 
+    @Column(name = "is_edit")
+    private boolean isEdit = false;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class DeXuatTonVinh {
 
     public void setChapNhanTonVinh(boolean chapNhanTonVinh) {
         this.chapNhanTonVinh = chapNhanTonVinh;
+    }
+
+    public boolean isEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
     }
 }

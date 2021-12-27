@@ -5,12 +5,8 @@ import com.k41.config.TaiKhoan;
 import com.k41.constants.PageActive;
 import com.k41.constants.PageConstant;
 import com.k41.constants.QuyenConstants;
-import com.k41.entity.NguoiDung;
-import com.k41.entity.Quyen;
-import com.k41.entity.QuyenNguoiDung;
-import com.k41.service.NguoiDungService;
-import com.k41.service.QuyenNguoiDungService;
-import com.k41.service.QuyenService;
+import com.k41.entity.*;
+import com.k41.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,14 +41,28 @@ public class VinhDanhMoiController {
     private QuyenService quyenService;
     @Autowired
     private QuyenNguoiDungService quyenNguoiDungService;
+    @Autowired
+    private DeXuatTonVinhScheduleService deXuatTonVinhScheduleService;
+    @Autowired
+    private DeXuatTonVinhService deXuatTonVinhService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String loadTrangQuanLyTaiKhoan(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         loadTen(model);
-
+        Pageable paging = PageRequest.of(page - 1, PageConstant.PAGE_SIZE, Sort.by("mucTonVinh").descending());
+        Page<DeXuatTonVinh> pageable = deXuatTonVinhService.findPage(paging);
+        List<DeXuatTonVinh> deXuatTonVinhs = pageable.getContent();
+        model.addAttribute("totalPage", pageable.getTotalPages());
+        model.addAttribute("deXuatTonVinhs", deXuatTonVinhs);
+        model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
         return "admin/VinhDanhMoi/VinhDanhMoi";
     }
-
+    @RequestMapping(value = { "/sync"}, method = RequestMethod.GET)
+    public String notSync(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+        loadTen(model);
+        deXuatTonVinhScheduleService.setSchedule(!deXuatTonVinhScheduleService.isSchedule());
+        return "redirect:/admin/vinhdanhmoi";
+    }
     private void loadTen(Model model) {
         model.addAttribute(PageActive.activevinhdanhmoi, PageActive.active);
         model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getHoTen());

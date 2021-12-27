@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface LichSuHienMauRepository extends JpaRepository<LichSuHienMau, Long> {
     Optional<LichSuHienMau> findByNguoiHienMauAndNgayHienMau(NguoiHienMau nguoiHienMau, Instant ngayHienMau);
+    List<LichSuHienMau> findByNguoiHienMau(NguoiHienMau nguoiHienMau);
 }
