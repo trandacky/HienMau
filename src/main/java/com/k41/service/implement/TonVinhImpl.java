@@ -1,9 +1,7 @@
 package com.k41.service.implement;
 
-import com.k41.entity.NguoiDung;
-import com.k41.repository.CoSoRepository;
+import com.k41.entity.TonVinh;
 import com.k41.repository.TonVinhRepository;
-import com.k41.service.NguoiDungService;
 import com.k41.service.TonVinhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +14,8 @@ public class TonVinhImpl implements TonVinhService {
     private TonVinhRepository tonVinhRepository;
 
     @Override
-    public Page<NguoiDung> findPage(Pageable paging) {
-        return tonVinhRepository.findAll(paging);
+    public Page<TonVinh> findPage(int year, Pageable paging) {
+
+        return tonVinhRepository.findAllByYear(year, paging);
     }
 }

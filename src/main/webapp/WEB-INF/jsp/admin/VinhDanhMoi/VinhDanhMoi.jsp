@@ -10,7 +10,7 @@
     <h2>Danh Sách đề xuất tôn vinh</h2>
     <div class="clearfix" style="float: right;">
         <td><a href="/admin/vinhdanhmoi/sync">
-            <input type="button"  class="btn btn-primary"
+            <input type="button" class="btn btn-primary"
                    style='background-color:
                    <c:if test="${tuDongDeXuat==false}">red</c:if>
                    <c:if test="${tuDongDeXuat==true}">green</c:if>'
@@ -19,13 +19,13 @@
         </a></td>
 
 
-
     </div>
     <table class="table table-striped">
         <tr>
             <th>Họ tên</th>
             <th>Tên Cơ Sở</th>
             <th>Số lần hiến</th>
+            <th>Cấp vinh danh</th>
             <th>Gợi ý vinh danh</th>
             <th>Thao tác</th>
         </tr>
@@ -34,17 +34,18 @@
                 <td>${deXuatTonVinh.getNguoiHienMau().getHoTen()}</td>
                 <td>${deXuatTonVinh.getNguoiHienMau().getCoSo().getTenCoSo()}</td>
                 <td>${deXuatTonVinh.getNguoiHienMau().getSoLanHienMau()}</td>
+                <td>${deXuatTonVinh.getNguoiHienMau().getMucTonVinh()}</td>
                 <td>${deXuatTonVinh.mucTonVinh}</td>
-<%--                <td><a href="/admin/coso/doiquyen?id=${coSo.id}">--%>
-<%--                    <input type="button"  class="btn btn-primary"--%>
-<%--                           style='background-color:--%>
-<%--                           <c:if test="${coSo.tinhTrangHoatDong==false}">red</c:if>--%>
-<%--                           <c:if test="${coSo.tinhTrangHoatDong==true}">green</c:if>'--%>
-<%--                           value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>--%>
-<%--                            <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>--%>
-<%--						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>--%>
-<%--                </a></td>--%>
-<%--                <td>{{deXuatTonVinh.}}</td>--%>
+                    <%--                <td><a href="/admin/coso/doiquyen?id=${coSo.id}">--%>
+                    <%--                    <input type="button"  class="btn btn-primary"--%>
+                    <%--                           style='background-color:--%>
+                    <%--                           <c:if test="${coSo.tinhTrangHoatDong==false}">red</c:if>--%>
+                    <%--                           <c:if test="${coSo.tinhTrangHoatDong==true}">green</c:if>'--%>
+                    <%--                           value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>--%>
+                    <%--                            <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>--%>
+                    <%--						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>--%>
+                    <%--                </a></td>--%>
+                    <%--                <td>{{deXuatTonVinh.}}</td>--%>
                 <td><a href="#">
                     <button class="btn btn-warning">Sửa</button>
 
@@ -63,5 +64,11 @@
         </c:forEach>
     </H5>
 </div>
+<a href="/admin/vinhdanhmoi/tontinh/submit">
+    <button class="btn btn-primary"
+            onclick="return confirm('Thao tác trên sẽ không hoàn lại được! Bạn có chắc thực hiện thao tác?');"
+            style="float: right">Tôn vinh
+    </button>
+</a>
 </body>
 </html>

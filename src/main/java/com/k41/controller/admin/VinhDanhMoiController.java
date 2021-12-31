@@ -63,6 +63,22 @@ public class VinhDanhMoiController {
         deXuatTonVinhScheduleService.setSchedule(!deXuatTonVinhScheduleService.isSchedule());
         return "redirect:/admin/vinhdanhmoi";
     }
+
+    @RequestMapping(value = {"/tontinh/submit"}, method = RequestMethod.GET)
+    public String uploadVinhDanh(Model model) {
+        loadTen(model);
+        deXuatTonVinhScheduleService.setSchedule(false);
+        deXuatTonVinhService.deXuat();
+        Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("mucTonVinh").descending());
+        Page<DeXuatTonVinh> pageable = deXuatTonVinhService.findPage(paging);
+        List<DeXuatTonVinh> deXuatTonVinhs = pageable.getContent();
+        deXuatTonVinhScheduleService.setSchedule(true);
+        model.addAttribute("totalPage", pageable.getTotalPages());
+        model.addAttribute("deXuatTonVinhs", deXuatTonVinhs);
+        model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
+        return "admin/VinhDanhMoi/VinhDanhMoi";
+    }
+
     private void loadTen(Model model) {
         model.addAttribute(PageActive.activevinhdanhmoi, PageActive.active);
         model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getHoTen());

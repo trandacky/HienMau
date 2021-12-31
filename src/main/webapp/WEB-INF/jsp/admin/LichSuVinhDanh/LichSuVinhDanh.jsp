@@ -5,17 +5,17 @@
 <html>
 <body>
 <c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
-<div class="row">
-    <div class="col-md-12">
-        <form class="form-inline my-2 my-lg-0 form-control"  action="/admin/coso/id/upload" method="Post">
-            <label class="form-label" for="customFile">Upload Danh Sách Hiến Máu Mới</label>
-            <input type="file" class="form-control col-md-7" id="customFile"/>
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Upload</button>
+<h2>Lịch sử Vinh Danh</h2>
+<div class="card text center">
+    <div class="card-body">
+        <form action="/admin/lichsuvinhdanh" method="get" class="row">
+            <div class="col-md-3">
+            <input class="form-control" name="year" type="number" id="year">
+            </div>
+            <button>Tìm</button>
         </form>
     </div>
 </div>
-<br>
-<br>
 <div>
     <form class="form-inline my-2 my-lg-0 form-control" action="/admin/coso/search" method="get">
         <input class="form-control mr-sm-2"
@@ -37,19 +37,27 @@
             <th>Số lần hiến</th>
             <th>Lần hiến gần nhât</th>
         </tr>
-        <c:forEach items="${coSos}" var="coSo">
+        <c:forEach items="${tonVinhs}" var="tonVinh">
             <tr>
-                <td><a href="/admin/coso/danhsach?id=${coSo.id}">${coSo.id}</a></td>
-                <td><a href="/admin/coso/danhsach?id=${coSo.id}">${coSo.tenCoSo}</a></td>
-                <td><a href="/admin/coso/doiquyen?id=${coSo.id}">
-                    <input type="button" class="btn btn-primary"
-                           style='background-color:
-                           <c:if test="${coSo.tinhTrangHoatDong==false}">red</c:if>
-                           <c:if test="${coSo.tinhTrangHoatDong==true}">green</c:if>'
-                           value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>
-                            <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>
-						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>
-                </a></td>
+                <td><a href="/admin/coso/danhsach?id=${tonVinh.id}">${tonVinh.id}</a></td>
+                <td><a href="/admin/coso/danhsach?id=${tonVinh.id}">${tonVinh.getNguoiHienMau().getHoTen()}</a></td>
+                <td>${tonVinh.getNguoiHienMau().getSoDienThoai()}</td>
+                <td>${tonVinh.getNguoiHienMau().getCmndOrCccd()}</td>
+                <td>${tonVinh.getNguoiHienMau().getNgaySinh()}</td>
+
+                <td>${tonVinh.getNguoiHienMau().getDiaChi()}</td>
+                <td>${tonVinh.mucTonVinh}</td>
+                <td>${tonVinh.getNguoiHienMau().getSoLanHienMau()}</td>
+                <td>${tonVinh.getNguoiHienMau().getLanHienGanNhat()}</td>
+<%--                <td><a href="/admin/coso/doiquyen?id=${coSo.id}">--%>
+<%--                    <input type="button" class="btn btn-primary"--%>
+<%--                           style='background-color:--%>
+<%--                           <c:if test="${coSo.tinhTrangHoatDong==false}">red</c:if>--%>
+<%--                           <c:if test="${coSo.tinhTrangHoatDong==true}">green</c:if>'--%>
+<%--                           value="<c:if test="${coSo.tinhTrangHoatDong==false}">Đã ngừng hoạt động</c:if>--%>
+<%--                            <c:if test="${coSo.tinhTrangHoatDong==true}">Đang hoạt động</c:if>--%>
+<%--						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>--%>
+<%--                </a></td>--%>
             </tr>
         </c:forEach>
 
@@ -61,7 +69,7 @@
     <H5>
         <c:forEach begin="1" end="${totalPage}" var="p">
             <a href="<c:url value="/admin/lichsuvinhdanh" >
-                <c:param name="page" value="${p}"/>${p}</c:url>">
+                <c:param name="page" value="${p}"/>${p}</c:url>&year=${year}">
                     ${p}</a>
         </c:forEach>
     </H5>

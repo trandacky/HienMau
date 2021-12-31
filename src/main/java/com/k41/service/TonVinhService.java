@@ -1,9 +1,9 @@
 package com.k41.service;
 
-import com.k41.entity.NguoiDung;
+import com.k41.entity.TonVinh;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface TonVinhService {
-    Page<NguoiDung> findPage(Pageable paging);
+    Page<TonVinh> findPage(int year, Pageable paging);
 }

@@ -4,6 +4,7 @@ import com.k41.config.TaiKhoan;
 import com.k41.constants.PageActive;
 import com.k41.constants.PageConstant;
 import com.k41.entity.NguoiDung;
+import com.k41.entity.TonVinh;
 import com.k41.service.TonVinhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -28,15 +31,18 @@ public class LichSuVinhDanh {
     private TaiKhoan taiKhoan;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String loadTrangQuanLyTaiKhoan(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    public String loadTrangQuanLyTaiKhoan(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "year", required = false) Integer year, Model model) {
+
         loadTen(model);
         if (ObjectUtils.isEmpty(page)) page = 1;
+        if (ObjectUtils.isEmpty(year)) year = Calendar.getInstance().get(Calendar.YEAR);
         Pageable paging = PageRequest.of(page - 1, PageConstant.PAGE_SIZE);
-        Page<NguoiDung> pageable = tonVinhService.findPage(paging);
+        Page<TonVinh> pageable = tonVinhService.findPage(year, paging);
 
-        List<NguoiDung> nguoiDungs = pageable.getContent();
-        model.addAttribute("nguoiDungs", nguoiDungs);
+        List<TonVinh> tonVinhs = pageable.getContent();
+        model.addAttribute("tonVinhs", tonVinhs);
         model.addAttribute("totalPage", pageable.getTotalPages());
+        model.addAttribute("year", year);
         return "admin/LichSuVinhDanh/LichSuVinhDanh";
     }
 

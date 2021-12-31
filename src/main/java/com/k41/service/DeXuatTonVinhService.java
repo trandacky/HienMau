@@ -10,4 +10,6 @@ public interface DeXuatTonVinhService {
     List<DeXuatTonVinh> findAll();
 
     Page<DeXuatTonVinh> findPage(Pageable paging);
+
+    void deXuat();
 }
