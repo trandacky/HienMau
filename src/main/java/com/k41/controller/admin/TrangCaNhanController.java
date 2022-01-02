@@ -39,7 +39,6 @@ public class TrangCaNhanController {
     public String loadTrangCaNhan(Model model) {
         loadTen(model);
         NguoiDung nguoiDung = taiKhoan.getTaiKhoanDangNhap();
-        log.info(nguoiDung.toString());
         model.addAttribute("nguoiDung", nguoiDung);
         return "admin/TrangCaNhan/TrangCaNhan";
     }
@@ -60,7 +59,6 @@ public class TrangCaNhanController {
         NguoiDung nguoiDung = taiKhoan.getTaiKhoanDangNhap();
         nguoiDung.setDiaChi(diaChi);
         nguoiDung.setHoTen(hoTen);
-        log.info(ngaySinh);
 
         nguoiDung.setSoDienThoai(soDienThoai);
         nguoiDung.setGioiTinh(Boolean.valueOf(gioiTinh));

@@ -29,14 +29,35 @@
 </style>
 <body>
 <c:if test="${not empty tennguoidung}">
-<c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
+    <c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
 </c:if>
 <c:if test="${empty tennguoidung}">
     <c:import url="/WEB-INF/jsp/HeaderUser.jsp"/>
 </c:if>
 
 <div class="text-center"><h3>Trang Chủ</h3></div>
+<div>
+    <form action="/home" method="get">
+        Năm:
+        <div class="row">
+            <div class="col-md-3">
+                <select class="form-control" name="year">
+                    <%
+                        for (int i = 2020; i < 2030; i += 1) {
+                    %>
+                    <option value="<%=i%>"><%=i%>
+                    </option>
+                    <%
+                        }
+                    %>
+                </select>
+            </div>
+            <button class="btn btn-primary">Tìm</button>
+        </div>
+    </form>
+</div>
 <div class="text-center">
+    <h3>Năm: ${year}</h3>
     <table class="table table-striped text-center">
         <%
             List<TonVinh> tonVinhs = (List<TonVinh>) request.getAttribute("tonVinhs");

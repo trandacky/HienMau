@@ -7,7 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface TonVinhRepository extends JpaRepository<TonVinh, Long> {
     @Query(value = "SELECT t from TonVinh t WHERE year(t.ngayTonVinh) = :year ")
     Page<TonVinh> findAllByYear(int year, Pageable paging);
+
+    @Query(value = "SELECT t from TonVinh t WHERE year(t.ngayTonVinh) = :year ")
+    List<TonVinh> findAllByYear(int year);
 }

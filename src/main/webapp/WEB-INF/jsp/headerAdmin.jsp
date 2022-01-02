@@ -41,7 +41,7 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<div >
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link ${activetrangchu}"
 						href="/home">Trang chủ</a></li>

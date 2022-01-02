@@ -12,4 +12,8 @@ public interface DeXuatTonVinhService {
     Page<DeXuatTonVinh> findPage(Pageable paging);
 
     void deXuat();
+
+    DeXuatTonVinh findById(Long id);
+
+    DeXuatTonVinh save(DeXuatTonVinh deXuatTonVinh);
 }

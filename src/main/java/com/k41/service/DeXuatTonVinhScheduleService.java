@@ -30,7 +30,7 @@ public class DeXuatTonVinhScheduleService {
     private LichSuHienMauRepository lichSuHienMauRepository;
 
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 5000)
     public void run() {
         if (!isSchedule) {
             log.info("Disable ton vinh schedule");
@@ -62,7 +62,6 @@ public class DeXuatTonVinhScheduleService {
                     deXuatTonVinhMoi.remove(deXuatTonVinh);
                     deXuatTonVinh= deXuatTonVinhs.get(i);
                     capDoTonVinh = (nguoiHienMau.getSoLanHienMau()/5);
-                    deXuatTonVinh.setMucTonVinh(capDoTonVinh * 5);
                     deXuatTonVinh.setNgayTonVinh(ngayDeXuat);
                     deXuatTonVinhMoi.add(deXuatTonVinh);
                     deXuatTonVinhs.remove(i);

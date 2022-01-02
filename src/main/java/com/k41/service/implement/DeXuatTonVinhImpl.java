@@ -59,4 +59,14 @@ public class DeXuatTonVinhImpl implements DeXuatTonVinhService {
         tonVinhRepository.saveAll(tonVinhs);
         nguoiHienMauRepository.saveAll(nguoiHienMaus);
     }
+
+    @Override
+    public DeXuatTonVinh findById(Long id) {
+        return deXuatTonVinhRepository.findById(id).get();
+    }
+
+    @Override
+    public DeXuatTonVinh save(DeXuatTonVinh deXuatTonVinh) {
+        return deXuatTonVinhRepository.save(deXuatTonVinh);
+    }
 }

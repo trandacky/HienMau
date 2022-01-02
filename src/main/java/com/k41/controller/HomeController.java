@@ -46,6 +46,6 @@ public class HomeController {
 
     private void loadTen(Model model) {
         model.addAttribute(PageActive.activetrangchu, PageActive.active);
-        model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getHoTen());
+        model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getTenDangNhap());
     }
 }

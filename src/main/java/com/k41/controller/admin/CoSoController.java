@@ -59,6 +59,17 @@ public class CoSoController {
     public String themCoSo(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
         loadTen(model);
         String tenCoSo = request.getParameter("tenCoSo");
+        if (ObjectUtils.isEmpty(tenCoSo)) {
+            if (ObjectUtils.isEmpty(page)) page = 1;
+            Pageable paging = PageRequest.of(page - 1, PageConstant.PAGE_SIZE, Sort.by("id").descending());
+            Page<CoSo> pageable = coSoService.findPage(paging);
+            List<CoSo> coSos = pageable.getContent();
+            model.addAttribute("message", "Tên không được rỗng");
+            model.addAttribute("alert", "danger");
+            model.addAttribute("coSos", coSos);
+            model.addAttribute("totalPage", pageable.getTotalPages());
+            return "/admin/CoSo/CoSo";
+        }
         CoSo coSo = new CoSo();
         coSo.setTenCoSo(tenCoSo);
         coSoService.save(coSo);
@@ -97,6 +108,20 @@ public class CoSoController {
     @RequestMapping(value = {"/danhsach"}, method = RequestMethod.POST)
     public String importDanhSachHienMauCoSo(@RequestParam(value = "id", required = true) Long id,
                                             Model model, HttpServletRequest request, MultipartFile file) throws Exception {
+
+        if (!file.getOriginalFilename().substring(file.getOriginalFilename().length() - 4).equalsIgnoreCase("xlsx")) {
+            model.addAttribute("message", "File không đúng định dạng");
+            model.addAttribute("alert", "danger");
+            loadTen(model);
+            Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("lanHienGanNhat").descending());
+            Page<NguoiHienMau> pageable = nguoiHienMauService.findPageByCoSoId(paging, id);
+            List<NguoiHienMau> nguoiHienMaus = pageable.getContent();
+            CoSo coSo = coSoService.findById(id);
+            model.addAttribute("coso", coSo);
+            model.addAttribute("nguoiHienMaus", nguoiHienMaus);
+            model.addAttribute("totalPage", pageable.getTotalPages());
+            return "/admin/NguoiHienMau/DanhSachNguoiHienMau";
+        }
         try {
             List<ImportDTO> importDTOS = importService.importExcelFile(file);
             nguoiHienMauService.saveByImportDTO(importDTOS, id);

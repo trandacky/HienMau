@@ -78,6 +78,29 @@ public class VinhDanhMoiController {
         model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
         return "admin/VinhDanhMoi/VinhDanhMoi";
     }
+    @RequestMapping(value = {"/edit/{id}"}, method = RequestMethod.GET)
+    public String editVinhDanh(Model model, @PathVariable Long id) {
+        loadTen(model);
+        DeXuatTonVinh deXuatTonVinh = deXuatTonVinhService.findById(id);
+        Pageable paging = PageRequest.of(0, PageConstant.PAGE_SIZE, Sort.by("mucTonVinh").descending());
+        Page<DeXuatTonVinh> pageable = deXuatTonVinhService.findPage(paging);
+        List<DeXuatTonVinh> deXuatTonVinhs = pageable.getContent();
+        model.addAttribute("totalPage", pageable.getTotalPages());
+        model.addAttribute("deXuatTonVinhs", deXuatTonVinhs);
+        model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
+        model.addAttribute("deXuatTonVinh", deXuatTonVinh);
+        return "admin/VinhDanhMoi/VinhDanhMoi";
+    }
+
+    @RequestMapping(value = {"/edit/{id}"}, method = RequestMethod.POST)
+    public String doEditVinhDanh(Model model, HttpServletRequest request, @PathVariable Long id) {
+        String mucTonVinh = request.getParameter("mucTonVinh");
+        DeXuatTonVinh deXuatTonVinh = deXuatTonVinhService.findById(id);
+        deXuatTonVinh.setMucTonVinh(Integer.valueOf(mucTonVinh));
+        deXuatTonVinh.setEdit(true);
+        deXuatTonVinh = deXuatTonVinhService.save(deXuatTonVinh);
+        return "redirect:/admin/vinhdanhmoi/";
+    }
 
     private void loadTen(Model model) {
         model.addAttribute(PageActive.activevinhdanhmoi, PageActive.active);

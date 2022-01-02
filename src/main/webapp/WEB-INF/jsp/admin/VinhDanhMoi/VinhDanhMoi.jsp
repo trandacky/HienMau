@@ -6,6 +6,9 @@
 <body>
 <c:import url="/WEB-INF/jsp/headerAdmin.jsp"/>
 <h2>Vinh Danh Mới</h2>
+<c:if test="${not empty deXuatTonVinh}">
+<c:import url="/WEB-INF/jsp/admin/VinhDanhMoi/SuaVinhDanhMoi.jsp"/>
+</c:if>
 <div class="text-center">
     <h2>Danh Sách đề xuất tôn vinh</h2>
     <div class="clearfix" style="float: right;">
@@ -28,6 +31,7 @@
             <th>Cấp vinh danh</th>
             <th>Gợi ý vinh danh</th>
             <th>Thao tác</th>
+            <th>Đã sửa</th>
         </tr>
         <c:forEach items="${deXuatTonVinhs}" var="deXuatTonVinh">
             <tr>
@@ -46,10 +50,14 @@
                     <%--						<c:if test="${nguoiDung.quyen==2}">USER</c:if>"/>--%>
                     <%--                </a></td>--%>
                     <%--                <td>{{deXuatTonVinh.}}</td>--%>
-                <td><a href="#">
-                    <button class="btn btn-warning">Sửa</button>
+                <td><a href="/admin/vinhdanhmoi/edit/${deXuatTonVinh.id}">
+                    <button class="btn btn-primary" style='background-color:<c:if test="${deXuatTonVinh.isEdit()==true}">red</c:if>
+                    <c:if test="${deXuatTonVinh.isEdit()==false}">green</c:if>'
+                            >Sửa</button>
 
                 </a></td>
+                <td><c:if test="${deXuatTonVinh.isEdit()==true}">Đã được sửa</c:if>
+                    <c:if test="${deXuatTonVinh.isEdit()==false}">Chưa được sửa</c:if></td>
             </tr>
         </c:forEach>
 
