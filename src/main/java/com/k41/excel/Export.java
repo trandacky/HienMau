@@ -1,7 +1,10 @@
 package com.k41.excel;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.ObjectUtils;
@@ -18,19 +21,12 @@ import java.util.Map;
 public class Export<T extends ExportDTO> {
 
     private int[] columnWidths;
-
     private int currentRow;
-
-    protected Map<Integer, Field> fieldsMap;
-
+    private Map<Integer, Field> fieldsMap;
     private Workbook workbook = new XSSFWorkbook();
-
     private Sheet sheet;
-
     private String sheetName;
-
     private List<String> listHeader;
-
     private List<T> listData;
 
     public Export(String sheetName, List<String> listHeaders) {
@@ -40,15 +36,10 @@ public class Export<T extends ExportDTO> {
     }
 
     public void generateTemplate() {
-
         this.sheet = workbook.createSheet(sheetName);
-
-        int headerRowStart = ++currentRow;
-
+        int headerRowStart = currentRow++;
         writeHeader();
-
         fixCellWidth(sheet);
-
         sheet.setAutoFilter(new CellRangeAddress(headerRowStart, headerRowStart, 0, listHeader.size() - 1));
     }
 
@@ -75,7 +66,6 @@ public class Export<T extends ExportDTO> {
             try {
                 if (!ObjectUtils.isEmpty(outputStream))
                     outputStream.close();
-
                 if (!ObjectUtils.isEmpty(workbook))
                     workbook.close();
             } catch (Exception e) {
@@ -87,12 +77,11 @@ public class Export<T extends ExportDTO> {
 
     private void fixCellWidth(Sheet sheet) {
         for (int i = 0; i < columnWidths.length; i++) {
-
             int width = (int) (columnWidths[i] < 10 ? columnWidths[i] * 2 * 256 : columnWidths[i] * 1.6 * 256);
-
             sheet.setColumnWidth(i, width);
         }
     }
+
     private void writeHeader() {
         Row headerRow = sheet.createRow(currentRow);
         for (int i = 0; i < listHeader.size(); i++) {
@@ -100,7 +89,6 @@ public class Export<T extends ExportDTO> {
             createCell(header, i, headerRow);
             columnWidths[i] = header.length();
         }
-
         currentRow++;
     }
 
@@ -114,28 +102,21 @@ public class Export<T extends ExportDTO> {
         if (!ObjectUtils.isEmpty(listData)) {
             Class<?> classExport = listData.get(0).getClass();
             setFieldsMap(classExport);
-
             for (ExportDTO item : listData) {
                 Row row = sheet.createRow(currentRow);
-
                 insertRowData(item, row);
             }
         }
     }
 
     private void insertRowData(ExportDTO item, Row row) throws Exception {
-
         int columnCount = 0;
-
         Class<?> itemClass = item.getClass();
-
         for (Field field : fieldsMap.values()) {
             String fieldName = field.getName().replaceFirst(field.getName().substring(0, 1),
                     field.getName().substring(0, 1).toUpperCase());
-
             Method method = itemClass.getMethod("get" + fieldName);
             Object value = method.invoke(item);
-
             if (!ObjectUtils.isEmpty(value)) {
                 createCell(value.toString(), columnCount, row);
             }
@@ -147,7 +128,6 @@ public class Export<T extends ExportDTO> {
     private void createCell(String cellValue, int columnCount, Row row) {
         Cell cell = createCell(columnCount, row);
         cell.setCellValue(cellValue);
-
         updateArrayWidth(cellValue.length(), columnCount);
     }
 
@@ -158,15 +138,16 @@ public class Export<T extends ExportDTO> {
         }
     }
 
-    private Cell createCell(int columnCount, Row row) {
-        Cell cell = row.createCell(columnCount);
-        return cell;
-    }
-
     private void setFieldsMap(Class<?> classExport) {
         Field[] arrayFields = classExport.getDeclaredFields();
         for (int count = 0; count < arrayFields.length; count++) {
             fieldsMap.put(count, arrayFields[count]);
         }
     }
+
+    private Cell createCell(int columnCount, Row row) {
+        Cell cell = row.createCell(columnCount);
+        return cell;
+    }
+
 }
