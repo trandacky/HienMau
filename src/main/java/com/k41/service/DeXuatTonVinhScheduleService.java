@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// dịch vụ chạy ngầm
 @Service
 @EnableScheduling
 @Slf4j
@@ -29,7 +30,7 @@ public class DeXuatTonVinhScheduleService {
     @Autowired
     private LichSuHienMauRepository lichSuHienMauRepository;
 
-
+// mỗi 5 giây sẽ tự động chạy đề xuất tôn vinh của hệ thống
     @Scheduled(fixedRate = 5000)
     public void run() {
         if (!isSchedule) {

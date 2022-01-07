@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+// dịch vụ sử dụng cho người hiến máu
 @Service
 public class NguoiHienMauImpl implements NguoiHienMauService {
     @Autowired
@@ -92,6 +93,7 @@ public class NguoiHienMauImpl implements NguoiHienMauService {
             if (nguoiHienMau.getLanHienGanNhat().isBefore(ngayHien)) {
                 nguoiHienMau.setLanHienGanNhat(ngayHien);
             }
+            nguoiHienMau = nguoiHienMauRepository.save(nguoiHienMau);
             lichSuHienMau = new LichSuHienMau();
             lichSuHienMau.setNguoiHienMau(nguoiHienMau);
             lichSuHienMau.setNgayHienMau(ngayHien);

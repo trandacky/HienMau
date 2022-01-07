@@ -1,5 +1,5 @@
 package com.k41.constants;
-
+// các loại quyền có trong hệ thống
 public enum QuyenConstants {
 
     USER("ROLE_USER"),

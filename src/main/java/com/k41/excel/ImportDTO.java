@@ -1,5 +1,6 @@
 package com.k41.excel;
 
+// các cột khi import excel
 public class ImportDTO {
     private String hoTen;
     private String ngaySinh;

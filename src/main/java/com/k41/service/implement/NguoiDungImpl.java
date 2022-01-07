@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+// dịch vụ sử dụng cho tài khoản
 @Service
 public class NguoiDungImpl implements NguoiDungService {
     @Autowired

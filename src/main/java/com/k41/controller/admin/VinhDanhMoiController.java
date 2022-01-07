@@ -1,11 +1,9 @@
 package com.k41.controller.admin;
 
-import com.k41.config.PasswordEncript;
 import com.k41.config.TaiKhoan;
 import com.k41.constants.PageActive;
 import com.k41.constants.PageConstant;
-import com.k41.constants.QuyenConstants;
-import com.k41.entity.*;
+import com.k41.entity.DeXuatTonVinh;
 import com.k41.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +13,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-
+// class cho đề xuất vinh danh/vinh danh mới
 @Controller
 @Slf4j
 @RequestMapping(value = "/admin/vinhdanhmoi")
@@ -57,7 +50,8 @@ public class VinhDanhMoiController {
         model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
         return "admin/VinhDanhMoi/VinhDanhMoi";
     }
-    @RequestMapping(value = { "/sync"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/sync"}, method = RequestMethod.GET)
     public String notSync(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         loadTen(model);
         deXuatTonVinhScheduleService.setSchedule(!deXuatTonVinhScheduleService.isSchedule());
@@ -78,6 +72,7 @@ public class VinhDanhMoiController {
         model.addAttribute("tuDongDeXuat", deXuatTonVinhScheduleService.isSchedule());
         return "admin/VinhDanhMoi/VinhDanhMoi";
     }
+
     @RequestMapping(value = {"/edit/{id}"}, method = RequestMethod.GET)
     public String editVinhDanh(Model model, @PathVariable Long id) {
         loadTen(model);

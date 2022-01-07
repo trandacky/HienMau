@@ -3,6 +3,7 @@ package com.k41.entity;
 import javax.persistence.*;
 import java.time.Instant;
 
+// class để mapping bảng trong database
 @Entity
 @Table(name = "ton_vinh")
 public class TonVinh {

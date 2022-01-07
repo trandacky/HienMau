@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
+// class chịu trách nhiệm tạo câu query vào database
 public interface NguoiHienMauRepository extends JpaRepository<NguoiHienMau, Long> {
     Page<NguoiHienMau> findByCoSoId(Long id, Pageable paging);
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.UnknownHostException;
 import java.util.Optional;
 
+// class cho các trang không cần quyền để truy cập
 @Controller
 public class Public {
     @Autowired
@@ -42,6 +43,7 @@ public class Public {
         return "/user/NhapEmailQuenMatKhau";
     }
 
+    // click vào link trong email sẽ trả về trang này
     @RequestMapping(value = {"/quen-mat-khau/{uuid}"},method = RequestMethod.GET)
     public String loadQuenMatKhau(@PathVariable String uuid, Model model) {
         model.addAttribute("uuid", uuid);
@@ -53,6 +55,7 @@ public class Public {
         return "/user/QuenMatKhau";
     }
 
+    // khi bấm nút đổi email
     @RequestMapping(value = {"/quen-mat-khau/{uuid}"},method = RequestMethod.POST)
     public String doiMatKhau(@PathVariable String uuid, Model model, HttpServletRequest request) {
         String matKhauMoi = request.getParameter("matKhauMoi");

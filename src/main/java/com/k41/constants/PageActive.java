@@ -1,5 +1,5 @@
 package com.k41.constants;
-
+// tên của tab trên UI dùng để kích hoạt sáng hay không
 public class PageActive {
     public static final String tennguoidung = "tennguoidung";
 

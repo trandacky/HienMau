@@ -6,6 +6,7 @@ import com.k41.service.QuyenNguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// quyền người dùng, ít sử dụng
 @Service
 public class QuyenNguoiDungImpl implements QuyenNguoiDungService {
     @Autowired

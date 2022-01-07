@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+// dịch vụ sử dụng để lấy danh sách được tôn vinh
 @Service
 public class TonVinhImpl implements TonVinhService {
     @Autowired

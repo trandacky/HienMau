@@ -1,15 +1,12 @@
 package com.k41.service.implement;
 
-import com.k41.controller.admin.LichSuVinhDanh;
 import com.k41.entity.DeXuatTonVinh;
 import com.k41.entity.NguoiHienMau;
 import com.k41.entity.TonVinh;
-import com.k41.repository.CoSoRepository;
 import com.k41.repository.DeXuatTonVinhRepository;
 import com.k41.repository.NguoiHienMauRepository;
 import com.k41.repository.TonVinhRepository;
 import com.k41.service.DeXuatTonVinhService;
-import com.k41.service.NguoiDungService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+// dịch vụ để sử dụng dành cho việc đề xuất tôn vinh
 @Service
 public class DeXuatTonVinhImpl implements DeXuatTonVinhService {
     @Autowired

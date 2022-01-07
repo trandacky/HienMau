@@ -6,6 +6,7 @@ import com.k41.service.QuyenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// dịch vụ cho quyền, ít sử dụng
 @Service
 public class QuyenImpl implements QuyenService {
     @Autowired

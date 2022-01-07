@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+// class chịu trách nhiệm tạo câu query vào database
 public interface TonVinhRepository extends JpaRepository<TonVinh, Long> {
     @Query(value = "SELECT t from TonVinh t WHERE year(t.ngayTonVinh) = :year ")
     Page<TonVinh> findAllByYear(int year, Pageable paging);

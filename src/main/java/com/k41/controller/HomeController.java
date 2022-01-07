@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Calendar;
 import java.util.List;
 
+// trang chủ
 @Controller
 @RequestMapping(value = {"/home"})
 public class HomeController {
@@ -29,6 +30,7 @@ public class HomeController {
     @Autowired
     private TonVinhService tonVinhService;
 
+    // trả về page trang của, load danh sách tôn tinh từ database lên
     @RequestMapping(method = RequestMethod.GET)
     public String homePge(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "year", required = false) Integer year, Model model) {
         loadTen(model);
@@ -44,6 +46,7 @@ public class HomeController {
         return "home";
     }
 
+    // load tên đăng nhập và active cái tiêu đề của trang của
     private void loadTen(Model model) {
         model.addAttribute(PageActive.activetrangchu, PageActive.active);
         model.addAttribute(PageActive.tennguoidung, taiKhoan.getTaiKhoanDangNhap().getTenDangNhap());

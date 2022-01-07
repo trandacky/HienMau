@@ -30,6 +30,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.List;
 
+// class load lịch sử vinh danh qua các đợt
 @Controller
 @RequestMapping(value = "/admin/lichsuvinhdanh")
 public class LichSuVinhDanh {

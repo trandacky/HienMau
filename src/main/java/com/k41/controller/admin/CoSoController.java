@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+// class load danh sách cơ sở, thêm, sửa, xoá cơ sở, import file từ cơ sở
 @Controller
 @Slf4j
 @RequestMapping(value = "/admin/coso")

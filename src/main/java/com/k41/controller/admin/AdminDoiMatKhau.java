@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.UnknownHostException;
 import java.util.Optional;
 
+// class dành cho admin để đổi mật khẩu
 @Controller
 @RequestMapping("/admin")
 public class AdminDoiMatKhau {

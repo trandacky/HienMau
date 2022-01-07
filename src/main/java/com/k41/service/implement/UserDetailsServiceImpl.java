@@ -1,10 +1,6 @@
 package com.k41.service.implement;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.k41.entity.NguoiDung;
 import com.k41.entity.QuyenNguoiDung;
 import com.k41.service.NguoiDungService;
@@ -18,7 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+
+// dịch vụ dành cho việc đăng nhập
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired

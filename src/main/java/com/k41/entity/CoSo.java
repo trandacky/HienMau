@@ -3,6 +3,7 @@ package com.k41.entity;
 import javax.persistence.*;
 import java.util.List;
 
+// class để mapping bảng trong database
 @Entity
 @Table(name = "co_so")
 public class CoSo {

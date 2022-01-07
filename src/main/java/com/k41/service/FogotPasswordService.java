@@ -15,6 +15,7 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.UUID;
 
+// dịch vụ gửi email quên mật khẩu
 @Service
 @Slf4j
 public class FogotPasswordService {

@@ -1,5 +1,6 @@
 package com.k41.excel;
 
+// class các cột trong excel
 public class ExportDTO {
     private String id;
     private String hoTen;

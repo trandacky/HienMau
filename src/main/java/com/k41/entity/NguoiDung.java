@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 
+// class để mapping bảng trong database
 @Entity
 @Table(name = "nguoi_dung")
 public class NguoiDung {

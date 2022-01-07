@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+//lấy thông tin tài khoản khi người dùng đăng nhập
 @Component
 public class TaiKhoan {
 

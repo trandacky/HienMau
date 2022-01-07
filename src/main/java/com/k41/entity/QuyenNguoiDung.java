@@ -2,6 +2,7 @@ package com.k41.entity;
 
 import javax.persistence.*;
 
+// class để mapping bảng trong database
 @Entity
 @Table(name = "quyen_nguoi_dung")
 public class QuyenNguoiDung {
